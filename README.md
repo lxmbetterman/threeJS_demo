@@ -1,4 +1,4 @@
-# Webpack2 multiple entry
+# 基于Webpack2 multiple entry的three.js的例子
 
 基于 webpack2 实现的多入口项目脚手架。
 
