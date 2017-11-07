@@ -12,25 +12,26 @@ function initThree() {
     antialias : true
   });
   renderer.setSize(width, height);
+  renderer.setClearColor("#fff");
   document.getElementById('canvas-frame').appendChild(renderer.domElement);
-  renderer.setClearColor("#333", 1.0);
+
 }
 
 var camera;
 function initCamera() {
-  camera = new THREE.PerspectiveCamera(45, width / height, 0, 1000);
+  camera = new THREE.PerspectiveCamera(75, width / height, 1, 10);
   //camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 10, 1000 );
   camera.position.x = 0;
   camera.position.y = 0;
-  camera.position.z = 600;
+  camera.position.z = 6;
   camera.up.x = 0;
   camera.up.y = 1;
   camera.up.z = 0;
-  camera.lookAt({
+  /*camera.lookAt({
     x : 0,
     y : 0,
     z : 0
-  });
+  });*/
 }
 
 var scene;
@@ -47,8 +48,10 @@ function initLight() {
 
 var cube;
 function initObject() {
-  var geometry = new THREE.CylinderGeometry( 70,100,100);
-  var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+  var geometry = new THREE.CylinderGeometry( 2, 2, 2, 64 );
+  var material = new THREE.MeshBasicMaterial({color:"blue"})
+  /*var geometry = new THREE.BoxBufferGeometry(2,2,2); //几何体
+  var material = new THREE.MeshBasicMaterial({color:"blue"}) //材质*/
   var mesh = new THREE.Mesh( geometry,material);
   console.log(mesh,"mesh")
    mesh.position.set(0,0,0);
@@ -71,11 +74,13 @@ function createUI()
 {
   var ParamObj = function() {
     this.fov = 45;
+    this.z=5
   };
 
   param = new ParamObj();
   var gui = new DAT.GUI();
   gui.add(param,"fov",0,180).name("视角大小");
+  gui.add(param,"z",4,200).name("相机z");
 }
 
 function animation()
@@ -85,15 +90,16 @@ function animation()
   requestAnimationFrame(animation);
 }
 
-function setCameraFov(fov)
+function setCameraFov(fov,z)
 {
   camera.fov = fov;
+  camera.position.z=z
   camera.updateProjectionMatrix();
 }
 
 function changeFov()
 {
-  setCameraFov(param.fov);
+  setCameraFov(param.fov,param.z);
 }
 
 window.onload=function () {
