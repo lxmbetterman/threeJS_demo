@@ -51,6 +51,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "art-template": "^4.12.1"
+    "art-template": "^4.12.1",
+    "three": "^0.88.0"
   }
 }
