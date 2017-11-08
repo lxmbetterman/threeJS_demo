@@ -19,7 +19,7 @@ function initThree() {
 
 var camera;
 function initCamera() {
-  camera = new THREE.PerspectiveCamera(75, width / height, 1, 10);
+  camera = new THREE.PerspectiveCamera(75, width / height, 1, 10000);
   //camera = new THREE.OrthographicCamera( window.innerWidth / - 2, window.innerWidth / 2, window.innerHeight / 2, window.innerHeight / - 2, 10, 1000 );
   camera.position.x = 0;
   camera.position.y = 0;
@@ -49,7 +49,8 @@ function initLight() {
 var cube;
 function initObject() {
   var geometry = new THREE.CylinderGeometry( 2, 2, 2, 64 );
-  var material = new THREE.MeshBasicMaterial({color:"blue"})
+  var material = new THREE.MeshBasicMaterial({color:"blue"}) //这种材质的颜色不受光线影响
+
   /*var geometry = new THREE.BoxBufferGeometry(2,2,2); //几何体
   var material = new THREE.MeshBasicMaterial({color:"blue"}) //材质*/
   var mesh = new THREE.Mesh( geometry,material);
@@ -74,13 +75,13 @@ function createUI()
 {
   var ParamObj = function() {
     this.fov = 45;
-    this.z=5
+    this.z=10
   };
 
   param = new ParamObj();
   var gui = new DAT.GUI();
   gui.add(param,"fov",0,180).name("视角大小");
-  gui.add(param,"z",4,200).name("相机z");
+  gui.add(param,"z",-10,200).name("相机z");
 }
 
 function animation()
