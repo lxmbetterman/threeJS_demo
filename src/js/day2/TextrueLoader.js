@@ -40,8 +40,7 @@ function init() {
       var material = new THREE.MeshBasicMaterial( {
         map: texture
       } );
-
-      var mesh = new THREE.Mesh( geometry,material );
+      mesh = new THREE.Mesh( geometry,material );
       scene.add( mesh );
     },
     // Function called when download progresses
@@ -68,5 +67,9 @@ function onWindowResize() {
 
 function animate() {
   requestAnimationFrame( animate );
+   mesh.rotation.x+=0.1;
+   /*mesh.rotation.y+=0.01;
+   mesh.rotation.z+=0.01;*/
+
   renderer.render( scene, camera );
 }
